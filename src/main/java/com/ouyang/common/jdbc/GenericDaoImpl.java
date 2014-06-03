@@ -1,4 +1,4 @@
-package com.ouyang.common;
+package com.ouyang.common.jdbc;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -16,14 +16,21 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 
-public class GenericDaoImpl<T> extends BaseDao implements GenericDao<T>
+import com.ouyang.common.annotation.Entry;
+import com.ouyang.util.DBUtil;
+
+public class GenericDaoImpl<T> implements GenericDao<T>
 {
 	private Class<T> clazz = null;
+	QueryRunner queryRunner = new QueryRunner(DBUtil.getDataSoure());
+
 	
 	public GenericDaoImpl()
 	{
@@ -225,7 +232,7 @@ public class GenericDaoImpl<T> extends BaseDao implements GenericDao<T>
 		
 	}
 
-	public Object getObject(Object id, Class propertyType)
+	private Object getObject(Object id, Class propertyType)
 	{
 		StringBuilder sql = new StringBuilder("select * from ").append(propertyType.getSimpleName().toLowerCase()).append(" where id = ?");
 		List<Object> list = query(sql.toString(),new MyBeanListHandler(propertyType), id);
@@ -235,5 +242,62 @@ public class GenericDaoImpl<T> extends BaseDao implements GenericDao<T>
 		}
 		return null;
 	}
+	
+
+	/**
+	 * 调用queryrunner的query方法执行select语句并捕获异常
+	 * @param sql
+	 * @param rsh
+	 * @param params
+	 * @return
+	 */
+	private <T> T query(String sql, ResultSetHandler<T> rsh, Object... params)
+	{
+		try
+		{
+			return queryRunner.query(sql, rsh, params);
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 调用queryrunner的update方法执行insert update delete语句并捕获异常
+	 * @param sql
+	 * @param params
+	 * @return
+	 */
+	public boolean update(String sql, Object... params)
+	{
+		try
+		{
+			int n = queryRunner.update(sql,params);
+			if(n > 0)
+			{
+				return true;
+			}
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public Object query(String sql, Object[] params)
+	{
+		List<Map<String, Object>> list = query(sql, new MapListHandler(), params);
+		if(list.size() == 1 && list.get(0).size() == 1)
+		{
+			return list.get(0).values().toArray()[0];
+		}
+		return list;
+	}
+	
+	
 	
 }

@@ -1,50 +1,46 @@
 package com.ouyang.entry;
 
-import com.ouyang.common.Entry;
+import com.ouyang.common.annotation.Entry;
 
 @Entry
 public class Bigdir
 {
-	private Long id;
 	private String name;
+	private Long id;
 	private String sn;
 	private Integer sort;
-	public Long getId()
-	{
-		return id;
-	}
-	public void setId(Long id)
-	{
-		this.id = id;
-	}
+
 	public String getName()
 	{
-		return name;
+		return this.name;
 	}
 	public void setName(String name)
 	{
-		this.name = name;
+		this.name=name;
+	}
+	public Long getId()
+	{
+		return this.id;
+	}
+	public void setId(Long id)
+	{
+		this.id=id;
 	}
 	public String getSn()
 	{
-		return sn;
+		return this.sn;
 	}
 	public void setSn(String sn)
 	{
-		this.sn = sn;
+		this.sn=sn;
 	}
 	public Integer getSort()
 	{
-		return sort;
+		return this.sort;
 	}
 	public void setSort(Integer sort)
 	{
-		this.sort = sort;
+		this.sort=sort;
 	}
-	@Override
-	public String toString()
-	{
-		return "Bigdir [id=" + id + ", name=" + name + ", sn=" + sn + ", sort="
-				+ sort + "]";
-	}
+
 }

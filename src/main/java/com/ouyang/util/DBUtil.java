@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -46,7 +47,7 @@ public class DBUtil
 		return null;
 	}
 
-	public static void close(Connection connection, PreparedStatement ps,
+	public static void close(Connection connection, Statement st,
 			ResultSet resultSet)
 	{
 		try
@@ -55,9 +56,9 @@ public class DBUtil
 			{
 				connection.close();
 			}
-			if(ps != null)
+			if(st != null)
 			{
-				ps.close();
+				st.close();
 			}
 			if(resultSet != null)
 			{
