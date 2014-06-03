@@ -4,6 +4,10 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.converters.IntegerConverter;
+import org.apache.commons.beanutils.converters.StringConverter;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.ouyang.dao.BigdirDao;
@@ -11,8 +15,17 @@ import com.ouyang.dao.impl.BigdirDaoImpl;
 import com.ouyang.entry.Bigdir;
 
 
-public class ConnectionTest
+public class BigdirTest
 {
+	@Before
+	public void init()
+	{
+		IntegerConverter integerConverter = new IntegerConverter(null);
+		ConvertUtils.register(integerConverter, Integer.class);
+		StringConverter stringConverter = new StringConverter(null);
+		ConvertUtils.register(stringConverter, String.class);
+	}
+	
 	@Test
 	public void testConnection() throws Exception
 	{
@@ -58,7 +71,7 @@ public class ConnectionTest
 	public void testList() throws Exception
 	{
 		BigdirDao bigdirDao = new BigdirDaoImpl();
-		List<Bigdir> list = bigdirDao.listQuery(null);
+		List<Bigdir> list = bigdirDao.listQuery(null,null,null,null);
 		
 		for (Bigdir bigdir : list)
 		{

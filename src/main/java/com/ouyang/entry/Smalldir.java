@@ -3,11 +3,12 @@ package com.ouyang.entry;
 import com.ouyang.common.Entry;
 
 @Entry
-public class Bigdir
+public class Smalldir
 {
 	private Long id;
 	private String name;
 	private String sn;
+	private Bigdir bigdir;
 	private Integer sort;
 	public Long getId()
 	{
@@ -41,10 +42,19 @@ public class Bigdir
 	{
 		this.sort = sort;
 	}
+	public Bigdir getBigdir()
+	{
+		return bigdir;
+	}
+	public void setBigdir(Bigdir bigdir)
+	{
+		this.bigdir = bigdir;
+	}
 	@Override
 	public String toString()
 	{
-		return "Bigdir [id=" + id + ", name=" + name + ", sn=" + sn + ", sort="
-				+ sort + "]";
+		return "Smalldir [id=" + id + ", name=" + name + ", sn=" + sn
+				+ ", bigdir=" + bigdir + ", sort=" + sort + "]";
 	}
+	
 }

@@ -3,6 +3,8 @@ package com.ouyang.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.beanutils.MethodUtils;
+
 public class Test
 {
 	@org.junit.Test
@@ -14,8 +16,6 @@ public class Test
 		int c = b.length;
 		List<String> d = new ArrayList<String>();
 		d.size();
-		
-		
 		
 		
 	}

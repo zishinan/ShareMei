@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 
-import com.ouyang.dao.BigdirDao;
 import com.ouyang.util.DBUtil;
 
 public class BaseDao
@@ -58,5 +57,6 @@ public class BaseDao
 		}
 		return false;
 	}
+	
 
 }
