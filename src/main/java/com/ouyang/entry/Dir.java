@@ -3,13 +3,21 @@ package com.ouyang.entry;
 import com.ouyang.common.annotation.Entry;
 
 @Entry
-public class Bigdir
+public class Dir
 {
+	private Integer sequence;
 	private String name;
 	private Long id;
-	private String sn;
-	private Integer sort;
+	private Dir dir;
 
+	public Integer getSequence()
+	{
+		return this.sequence;
+	}
+	public void setSequence(Integer sequence)
+	{
+		this.sequence=sequence;
+	}
 	public String getName()
 	{
 		return this.name;
@@ -26,21 +34,13 @@ public class Bigdir
 	{
 		this.id=id;
 	}
-	public String getSn()
+	public Dir getDir()
 	{
-		return this.sn;
+		return this.dir;
 	}
-	public void setSn(String sn)
+	public void setDir(Dir dir)
 	{
-		this.sn=sn;
-	}
-	public Integer getSort()
-	{
-		return this.sort;
-	}
-	public void setSort(Integer sort)
-	{
-		this.sort=sort;
+		this.dir=dir;
 	}
 
 }

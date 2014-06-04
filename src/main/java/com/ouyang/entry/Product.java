@@ -7,7 +7,6 @@ import com.ouyang.common.annotation.Entry;
 public class Product
 {
 	private String spic;
-	private Smalldir Smalldir;
 	private Double price;
 	private Double sell;
 	private String name;
@@ -16,6 +15,7 @@ public class Product
 	private String sn;
 	private String pic;
 	private Integer sort;
+	private Dir dir;
 	private String content;
 
 	public String getSpic()
@@ -25,14 +25,6 @@ public class Product
 	public void setSpic(String spic)
 	{
 		this.spic=spic;
-	}
-	public Smalldir getSmalldir()
-	{
-		return this.Smalldir;
-	}
-	public void setSmalldir(Smalldir Smalldir)
-	{
-		this.Smalldir=Smalldir;
 	}
 	public Double getPrice()
 	{
@@ -97,6 +89,14 @@ public class Product
 	public void setSort(Integer sort)
 	{
 		this.sort=sort;
+	}
+	public Dir getDir()
+	{
+		return this.dir;
+	}
+	public void setDir(Dir dir)
+	{
+		this.dir=dir;
 	}
 	public String getContent()
 	{

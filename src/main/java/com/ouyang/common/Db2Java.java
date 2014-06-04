@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 import com.ouyang.util.DBUtil;
 
 public class Db2Java
@@ -22,6 +24,8 @@ public class Db2Java
 	private static final String dbName = "sharemei";
 	private static final String packageInfo = "com.ouyang.";
 	private static final String packageName = "/src/main/java/com/ouyang/";
+	
+	private static final Logger log = Logger.getLogger(Db2Java.class);
 
 	static
 	{
@@ -48,7 +52,9 @@ public class Db2Java
 			creatService(string);
 			creatServiceImpl(string);
 		}
-		System.out.println("更新文件成功！");
+		
+		log.debug("更新文件成功！");
+		
 	}
 	
 	private static String getEntryStr(String tableName)

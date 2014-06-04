@@ -75,7 +75,10 @@ public class GenericDaoImpl<T> implements GenericDao<T>
 				if(propertyType.isAnnotationPresent(Entry.class))
 				{
 					propertyName = propertyName + "_id";
-					value = MethodUtils.invokeMethod(value, "getId");
+					if(null != value)
+					{
+						value = MethodUtils.invokeMethod(value, "getId");
+					}
 				}
 				
 				insertSql.append(propertyName).append(",");
