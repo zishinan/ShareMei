@@ -45,8 +45,10 @@ public class Db2Java
 			creatEntry(string);
 			creatDao(string);
 			creatDaoImpl(string);
-			System.out.println("更新文件成功！");
+			creatService(string);
+			creatServiceImpl(string);
 		}
+		System.out.println("更新文件成功！");
 	}
 	
 	private static String getEntryStr(String tableName)
@@ -183,6 +185,138 @@ public class Db2Java
 				sb.append("public class ").append(entryName).append("DaoImpl").append(" extends GenericDaoImpl<").append(entryName).append(">").append(" implements ").append(entryName).append("Dao\r\n");
 				sb.append("{\r\n\r\n}");
 				
+				fw.write(sb.toString());
+				fw.flush();
+				fw.close();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 生成service目录和java文件
+	 * @param tableName
+	 */
+	private static void creatService(String tableName)
+	{
+		StringBuilder path = new StringBuilder(System.getProperty("user.dir")).append(packageName).append("service");
+		File filePath = new File(path.toString());
+		if(!filePath.exists())
+		{
+			filePath.mkdirs();
+		}
+		File file = new File(path.toString(), upperFirestChar(tableName) + "Service.java");
+		if(!file.exists())
+		{
+			try
+			{
+				String entryName = upperFirestChar(tableName);
+				FileWriter fw = new FileWriter(file);
+				StringBuilder sb = new StringBuilder("package ").append(packageInfo).append("service;\r\n\r\n");
+				sb.append("import java.util.List;\r\n\r\n");
+				sb.append("import ").append(packageInfo).append("entry.").append(entryName).append(";\r\n\r\n");
+				sb.append("public interface ").append(entryName).append("Service").append("\r\n");
+				sb.append("{\r\n\t");
+				sb.append("public boolean add(").append(entryName).append(" ").append(tableName).append(");\r\n\r\n\t");
+				sb.append("public boolean delete(Long id);\r\n\r\n\t");
+				sb.append("public boolean update(").append(entryName).append(" ").append(tableName).append(");\r\n\r\n\t");
+				sb.append("public ").append(entryName).append(" getById(Long id);\r\n\r\n\t");
+				sb.append("public List<").append(entryName).append("> list();\r\n}");
+				
+				fw.write(sb.toString());
+				fw.flush();
+				fw.close();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 生成serviceimpl目录和java文件
+	 * @param tableName
+	 */
+	private static void creatServiceImpl(String tableName)
+	{
+		StringBuilder path = new StringBuilder(System.getProperty("user.dir")).append(packageName).append("service/impl");
+		File filePath = new File(path.toString());
+		if(!filePath.exists())
+		{
+			filePath.mkdirs();
+		}
+		File file = new File(path.toString(), upperFirestChar(tableName) + "ServiceImpl.java");
+		if(!file.exists())
+		{
+			try
+			{
+				String entryName = upperFirestChar(tableName);
+				FileWriter fw = new FileWriter(file);
+				StringBuilder sb = new StringBuilder("package ").append(packageInfo).append("service.impl;\r\n\r\n");
+				sb.append("import java.util.List;\r\n");
+				sb.append("import ").append(packageInfo).append("dao.").append(entryName).append("Dao;\r\n");
+				sb.append("import ").append(packageInfo).append("dao.impl.").append(entryName).append("DaoImpl;\r\n");
+				sb.append("import ").append(packageInfo).append("entry.").append(entryName).append(";\r\n");
+				sb.append("import ").append(packageInfo).append("service.").append(entryName).append("Service;\r\n\r\n");
+				sb.append("public class ").append(entryName).append("ServiceImpl implements ").append(entryName).append("Service\r\n{");
+				sb.append("\r\n\t");
+				sb.append("private static ").append(entryName).append("Dao").append(" ").append(tableName).append("Dao").append(" = new ").append(entryName).append("DaoImpl();");
+				sb.append("\r\n\t");
+				sb.append("@Override");
+				sb.append("\r\n\t");
+				sb.append("public boolean add(").append(entryName).append(" ").append(tableName).append(")");
+				sb.append("\r\n\t");
+				sb.append("{");
+				sb.append("\r\n\t\t");
+				sb.append("return ").append(tableName).append("Dao").append(".add(").append(tableName).append(");");
+				sb.append("\r\n\t");
+				sb.append("}");
+				sb.append("\r\n\t");
+				sb.append("@Override");
+				sb.append("\r\n\t");
+				sb.append("public boolean delete(Long id)");
+				sb.append("\r\n\t");
+				sb.append("{");
+				sb.append("\r\n\t\t");
+				sb.append("return ").append(tableName).append("Dao").append(".delete(id);");
+				sb.append("\r\n\t");
+				sb.append("}");
+				sb.append("\r\n\t");
+				sb.append("@Override");
+				sb.append("\r\n\t");
+				sb.append("public boolean update(").append(entryName).append(" ").append(tableName).append(")");
+				sb.append("\r\n\t");
+				sb.append("{");
+				sb.append("\r\n\t\t");
+				sb.append("return ").append(tableName).append("Dao").append(".update(").append(tableName).append(");");
+				sb.append("\r\n\t");
+				sb.append("}");
+				sb.append("\r\n\t");
+				sb.append("@Override");
+				sb.append("\r\n\t");
+				sb.append("public ").append(entryName).append(" getById(Long id)");
+				sb.append("\r\n\t");
+				sb.append("{");
+				sb.append("\r\n\t\t");
+				sb.append("return ").append(tableName).append("Dao.getById(id);");
+				sb.append("\r\n\t");
+				sb.append("}");
+				sb.append("\r\n\t");
+				sb.append("@Override");
+				sb.append("\r\n\t");
+				sb.append("public List<").append(entryName).append("> list()");
+				sb.append("\r\n\t");
+				sb.append("{");
+				sb.append("\r\n\t\t");
+				sb.append("return ").append(tableName).append("Dao.listQuery(null, null, null, null);");
+				sb.append("\r\n\t");
+				sb.append("}");
+				sb.append("\r\n");
+				sb.append("}");
 				fw.write(sb.toString());
 				fw.flush();
 				fw.close();
