@@ -238,7 +238,7 @@ public class GenericDaoImpl<T> implements GenericDao<T>
 	private Object getObject(Object id, Class propertyType)
 	{
 		StringBuilder sql = new StringBuilder("select * from ").append(propertyType.getSimpleName().toLowerCase()).append(" where id = ?");
-		List<Object> list = query(sql.toString(),new MyBeanListHandler(propertyType), id);
+		List<Object> list = query(sql.toString(),new MyBeanListHandler<Object>(propertyType), id);
 		if(list != null && list.size() > 0)
 		{
 			return list.get(0);

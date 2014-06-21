@@ -1,3 +1,8 @@
 /logs
 
 /WebRoot/WEB-INF/classes
+
+/target
+/.classpath
+/.project
+/.settings
