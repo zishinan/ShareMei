@@ -1,16 +1,12 @@
 package com.ouyang.servlet;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.beanutils.BeanUtils;
 
 import com.ouyang.common.servlet.BaseServlet;
 import com.ouyang.entry.Dir;
@@ -35,27 +31,19 @@ public class DirServlet extends BaseServlet
 	public void add(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
-		request.getRequestDispatcher("/WEB-INF/view/dir/addDir.jsp").forward(
-				request, response);
+		forward(request, response,"/WEB-INF/view/dir/addDir.jsp");
 	}
 
 	public void save(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
 		request.setCharacterEncoding("UTF-8");
-		Map<String, String[]> map = request.getParameterMap();
 		Dir dir = new Dir();
-		System.out.println(dir);
-		try
-		{
-			BeanUtils.copyProperties(dir, map);
-		}
-		catch (IllegalAccessException | InvocationTargetException e)
-		{
-			e.printStackTrace();
-		}
+		request2Object(request, dir);
 		System.out.println(dir);
 		dirService.add(dir);
 		list(request, response);
 	}
+
+	
 }
