@@ -15,7 +15,6 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 
-import com.ouyang.entry.Dir;
 import com.ouyang.entry.User;
 import com.ouyang.service.UserService;
 import com.ouyang.service.impl.UserServiceImpl;

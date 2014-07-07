@@ -1,21 +1,28 @@
 package com.ouyang.entry;
 
+import java.util.Date;
 import com.ouyang.common.annotation.Entry;
 
 @Entry
 public class User
 {
-	private String birthday;
-	private String protectid;
-	private String password;
-	private String phone;
-	private String sex;
-	private String nickname;
-	private String name;
-	private String ctime;
 	private Long id;
+	private String birthday;
+	private String sex;
+	private String phone;
+	private String nickname;
 	private String email;
+	private String name;
+	private Date ctime;
 
+	public Long getId()
+	{
+		return this.id;
+	}
+	public void setId(Long id)
+	{
+		this.id=id;
+	}
 	public String getBirthday()
 	{
 		return this.birthday;
@@ -23,30 +30,6 @@ public class User
 	public void setBirthday(String birthday)
 	{
 		this.birthday=birthday;
-	}
-	public String getProtectid()
-	{
-		return this.protectid;
-	}
-	public void setProtectid(String protectid)
-	{
-		this.protectid=protectid;
-	}
-	public String getPassword()
-	{
-		return this.password;
-	}
-	public void setPassword(String password)
-	{
-		this.password=password;
-	}
-	public String getPhone()
-	{
-		return this.phone;
-	}
-	public void setPhone(String phone)
-	{
-		this.phone=phone;
 	}
 	public String getSex()
 	{
@@ -56,6 +39,14 @@ public class User
 	{
 		this.sex=sex;
 	}
+	public String getPhone()
+	{
+		return this.phone;
+	}
+	public void setPhone(String phone)
+	{
+		this.phone=phone;
+	}
 	public String getNickname()
 	{
 		return this.nickname;
@@ -63,6 +54,14 @@ public class User
 	public void setNickname(String nickname)
 	{
 		this.nickname=nickname;
+	}
+	public String getEmail()
+	{
+		return this.email;
+	}
+	public void setEmail(String email)
+	{
+		this.email=email;
 	}
 	public String getName()
 	{
@@ -72,29 +71,13 @@ public class User
 	{
 		this.name=name;
 	}
-	public String getCtime()
+	public Date getCtime()
 	{
 		return this.ctime;
 	}
-	public void setCtime(String ctime)
+	public void setCtime(Date ctime)
 	{
 		this.ctime=ctime;
-	}
-	public Long getId()
-	{
-		return this.id;
-	}
-	public void setId(Long id)
-	{
-		this.id=id;
-	}
-	public String getEmail()
-	{
-		return this.email;
-	}
-	public void setEmail(String email)
-	{
-		this.email=email;
 	}
 
 }

@@ -6,25 +6,41 @@ import com.ouyang.common.annotation.Entry;
 @Entry
 public class Product
 {
-	private String spic;
+	private Long id;
+	private String content;
+	private String sn;
 	private Double price;
 	private Double sell;
-	private String name;
-	private Date ctime;
-	private Long id;
-	private String sn;
-	private String pic;
-	private Integer sort;
 	private Dir dir;
-	private String content;
+	private Integer sequence;
+	private String name;
+	private String pic;
+	private String spic;
+	private Date ctime;
 
-	public String getSpic()
+	public Long getId()
 	{
-		return this.spic;
+		return this.id;
 	}
-	public void setSpic(String spic)
+	public void setId(Long id)
 	{
-		this.spic=spic;
+		this.id=id;
+	}
+	public String getContent()
+	{
+		return this.content;
+	}
+	public void setContent(String content)
+	{
+		this.content=content;
+	}
+	public String getSn()
+	{
+		return this.sn;
+	}
+	public void setSn(String sn)
+	{
+		this.sn=sn;
 	}
 	public Double getPrice()
 	{
@@ -42,6 +58,22 @@ public class Product
 	{
 		this.sell=sell;
 	}
+	public Dir getDir()
+	{
+		return this.dir;
+	}
+	public void setDir(Dir dir)
+	{
+		this.dir=dir;
+	}
+	public Integer getSequence()
+	{
+		return this.sequence;
+	}
+	public void setSequence(Integer sequence)
+	{
+		this.sequence=sequence;
+	}
 	public String getName()
 	{
 		return this.name;
@@ -49,30 +81,6 @@ public class Product
 	public void setName(String name)
 	{
 		this.name=name;
-	}
-	public Date getCtime()
-	{
-		return this.ctime;
-	}
-	public void setCtime(Date ctime)
-	{
-		this.ctime=ctime;
-	}
-	public Long getId()
-	{
-		return this.id;
-	}
-	public void setId(Long id)
-	{
-		this.id=id;
-	}
-	public String getSn()
-	{
-		return this.sn;
-	}
-	public void setSn(String sn)
-	{
-		this.sn=sn;
 	}
 	public String getPic()
 	{
@@ -82,29 +90,21 @@ public class Product
 	{
 		this.pic=pic;
 	}
-	public Integer getSort()
+	public String getSpic()
 	{
-		return this.sort;
+		return this.spic;
 	}
-	public void setSort(Integer sort)
+	public void setSpic(String spic)
 	{
-		this.sort=sort;
+		this.spic=spic;
 	}
-	public Dir getDir()
+	public Date getCtime()
 	{
-		return this.dir;
+		return this.ctime;
 	}
-	public void setDir(Dir dir)
+	public void setCtime(Date ctime)
 	{
-		this.dir=dir;
-	}
-	public String getContent()
-	{
-		return this.content;
-	}
-	public void setContent(String content)
-	{
-		this.content=content;
+		this.ctime=ctime;
 	}
 
 }

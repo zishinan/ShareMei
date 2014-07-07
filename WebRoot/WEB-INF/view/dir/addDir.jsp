@@ -8,13 +8,13 @@
 </head>
 <body>
 	<form action="dir?cmd=save" method="post">
-		分类名称：<input name="name" type="text"><br>
+		分类名称：<input name="name" type="text" /><br>
+		分类编号：<input name="sn" type="text" /><br>
 		所属分类：<select name="dir">
 				<option value=""></option>
 				<option value="1">一号</option>
 				<option value="2">二号</option>
 			  </select><br>
-		排序序号：<input name="sequence" type="text"><br>
 		
 		<input type="submit" value="添加" >&nbsp;&nbsp;<input type="reset" value="重置">
 	</form>

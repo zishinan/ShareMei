@@ -5,11 +5,36 @@ import com.ouyang.common.annotation.Entry;
 @Entry
 public class Dir
 {
+	private Long id;
+	private String sn;
+	private Dir dir;
 	private Integer sequence;
 	private String name;
-	private Long id;
-	private Dir dir;
 
+	public Long getId()
+	{
+		return this.id;
+	}
+	public void setId(Long id)
+	{
+		this.id=id;
+	}
+	public String getSn()
+	{
+		return this.sn;
+	}
+	public void setSn(String sn)
+	{
+		this.sn=sn;
+	}
+	public Dir getDir()
+	{
+		return this.dir;
+	}
+	public void setDir(Dir dir)
+	{
+		this.dir=dir;
+	}
 	public Integer getSequence()
 	{
 		return this.sequence;
@@ -25,22 +50,6 @@ public class Dir
 	public void setName(String name)
 	{
 		this.name=name;
-	}
-	public Long getId()
-	{
-		return this.id;
-	}
-	public void setId(Long id)
-	{
-		this.id=id;
-	}
-	public Dir getDir()
-	{
-		return this.dir;
-	}
-	public void setDir(Dir dir)
-	{
-		this.dir=dir;
 	}
 
 }

@@ -32,6 +32,7 @@ public class GenericDaoImpl<T> implements GenericDao<T>
 	QueryRunner queryRunner = new QueryRunner(DBUtil.getDataSoure());
 
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public GenericDaoImpl()
 	{
 		//获取子类的对象对应的Class
@@ -180,6 +181,7 @@ public class GenericDaoImpl<T> implements GenericDao<T>
 		return query(sql.toString(), new MyBeanListHandler<T>(this.clazz), params);
 	}
 	
+	@SuppressWarnings("hiding")
 	class MyBeanListHandler<T> implements ResultSetHandler<List<T>>
 	{
 		private Class<T> clz;
@@ -235,6 +237,7 @@ public class GenericDaoImpl<T> implements GenericDao<T>
 		
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private Object getObject(Object id, Class propertyType)
 	{
 		StringBuilder sql = new StringBuilder("select * from ").append(propertyType.getSimpleName().toLowerCase()).append(" where id = ?");
@@ -254,6 +257,7 @@ public class GenericDaoImpl<T> implements GenericDao<T>
 	 * @param params
 	 * @return
 	 */
+	@SuppressWarnings("hiding")
 	private <T> T query(String sql, ResultSetHandler<T> rsh, Object... params)
 	{
 		try

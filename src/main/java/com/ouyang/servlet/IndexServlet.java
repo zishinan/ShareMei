@@ -13,6 +13,7 @@ public class IndexServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 424192481903743911L;
 
+	@SuppressWarnings("unused")
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
