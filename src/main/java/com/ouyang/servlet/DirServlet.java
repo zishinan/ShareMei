@@ -1,12 +1,8 @@
 package com.ouyang.servlet;
 
-import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.ouyang.common.servlet.BaseServlet;
 import com.ouyang.entry.Dir;
@@ -19,30 +15,26 @@ public class DirServlet extends BaseServlet
 	DirService dirService = new DirServiceImpl();
 	private static final long serialVersionUID = 1L;
 
-	public void list(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
+	public void list()
 	{
 		List<Dir> list = dirService.list();
 		request.setAttribute("dirs", list);
-		request.getRequestDispatcher("/WEB-INF/view/dir/listDir.jsp").forward(
-				request, response);
+		
+		forward("/WEB-INF/view/dir/listDir.jsp");
 	}
 
-	public void add(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
+	public void add()
 	{
-		forward(request, response,"/WEB-INF/view/dir/addDir.jsp");
+		forward("/WEB-INF/view/dir/addDir.jsp");
 	}
 
-	public void save(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
+	public void save()
 	{
-		request.setCharacterEncoding("UTF-8");
 		Dir dir = new Dir();
-		request2Object(request, dir);
+		request2Object(dir);
 		System.out.println(dir);
 		dirService.add(dir);
-		list(request, response);
+		list();
 	}
 
 	

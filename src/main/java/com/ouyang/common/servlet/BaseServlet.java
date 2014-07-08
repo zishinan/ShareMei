@@ -1,6 +1,7 @@
 package com.ouyang.common.servlet;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
@@ -15,7 +16,9 @@ import org.apache.commons.lang3.reflect.MethodUtils;
 
 public abstract class BaseServlet extends HttpServlet
 {
-
+	private static final long serialVersionUID = -5234775202951986769L;
+	protected HttpServletRequest request;
+	protected HttpServletResponse response;
 	public BaseServlet()
 	{
 		super();
@@ -26,13 +29,17 @@ public abstract class BaseServlet extends HttpServlet
 			throws ServletException, IOException
 	{
 		request.setCharacterEncoding("UTF-8");
+		
 		String cmd = request.getParameter("cmd");
+		
+		this.request = request;
+		this.response = response;
 	
 		if (StringUtils.isNotBlank(cmd))
 		{
 			try
 			{
-				MethodUtils.invokeMethod(this, cmd, request, response);
+				MethodUtils.invokeMethod(this, cmd);
 			}
 			catch (NoSuchMethodException | IllegalAccessException
 					| InvocationTargetException e)
@@ -42,18 +49,18 @@ public abstract class BaseServlet extends HttpServlet
 		}
 		else
 		{
-			list(request, response);
+			list();
 		}
 	}
 
-	protected abstract void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+	protected abstract void list();
 	
 	/**
 	 * 将表单数据拷贝到对象
 	 * @param request
 	 * @param object
 	 */
-	protected void request2Object(HttpServletRequest request, Object object)
+	protected void request2Object(Object object)
 	{
 		Map<String, String[]> map = request.getParameterMap();
 		try
@@ -74,11 +81,17 @@ public abstract class BaseServlet extends HttpServlet
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	protected void forward(HttpServletRequest request,
-			HttpServletResponse response, String path) throws ServletException, IOException
+	protected void forward(String path)
 	{
-		request.getRequestDispatcher(path).forward(
-				request, response);
+		try
+		{
+			request.getRequestDispatcher(path).forward(
+					request, response);
+		}
+		catch (ServletException | IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 }
