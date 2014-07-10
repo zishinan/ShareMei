@@ -1,9 +1,10 @@
 package com.ouyang.service.impl;
 
 import java.util.List;
+
 import com.ouyang.dao.DirDao;
 import com.ouyang.dao.impl.DirDaoImpl;
-import com.ouyang.entry.Dir;
+import com.ouyang.entity.Dir;
 import com.ouyang.service.DirService;
 
 public class DirServiceImpl implements DirService

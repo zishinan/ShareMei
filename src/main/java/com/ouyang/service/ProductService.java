@@ -3,7 +3,7 @@ package com.ouyang.service;
 import java.util.List;
 
 import com.ouyang.common.exception.LogicException;
-import com.ouyang.entry.Product;
+import com.ouyang.entity.Product;
 
 public interface ProductService
 {

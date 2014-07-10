@@ -1,4 +1,4 @@
-package com.ouyang.entry;
+package com.ouyang.entity;
 
 import com.ouyang.common.annotation.Entry;
 

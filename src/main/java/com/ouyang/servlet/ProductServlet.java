@@ -9,8 +9,8 @@ import com.ouyang.entity.Dir;
 import com.ouyang.service.DirService;
 import com.ouyang.service.impl.DirServiceImpl;
 
-@WebServlet("/dir")
-public class DirServlet extends BaseServlet
+@WebServlet("/product")
+public class ProductServlet extends BaseServlet
 {
 	DirService dirService = new DirServiceImpl();
 	private static final long serialVersionUID = 1L;
@@ -25,7 +25,7 @@ public class DirServlet extends BaseServlet
 
 	public void add()
 	{
-		forward("/WEB-INF/view/dir/addDir.jsp");
+		forward("/WEB-INF/view/product/addProduct.jsp");
 	}
 
 	public void save()

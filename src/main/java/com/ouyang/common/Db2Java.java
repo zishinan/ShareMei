@@ -62,7 +62,7 @@ public class Db2Java
 		Map<String, String> map = getBeanMap(tableName);
 		Set<String> keySet = map.keySet();
 		StringBuilder sb = new StringBuilder("package ");
-		sb.append(packageInfo).append("entry;\r\n\r\n");
+		sb.append(packageInfo).append("entity;\r\n\r\n");
 		boolean noDate = true;
 		for (String key : keySet)
 		{
@@ -104,12 +104,12 @@ public class Db2Java
 	}
 
 	/**
-	 * 生成entry目录和java文件
+	 * 生成entity目录和java文件
 	 * @param tableName
 	 */
 	private static void creatEntry(String tableName)
 	{
-		StringBuilder path = new StringBuilder(System.getProperty("user.dir")).append(packageName).append("entry");
+		StringBuilder path = new StringBuilder(System.getProperty("user.dir")).append(packageName).append("entity");
 		File filePath = new File(path.toString());
 		if(!filePath.exists())
 		{
@@ -187,7 +187,7 @@ public class Db2Java
 				StringBuilder sb = new StringBuilder("package ").append(packageInfo).append("dao.impl;\r\n\r\n");
 				sb.append("import ").append(packageInfo).append("common.jdbc.GenericDaoImpl;\r\n");
 				sb.append("import ").append(packageInfo).append("dao.").append(entryName).append("Dao;\r\n");
-				sb.append("import ").append(packageInfo).append("entry.").append(entryName).append(";\r\n\r\n");
+				sb.append("import ").append(packageInfo).append("entity.").append(entryName).append(";\r\n\r\n");
 				sb.append("public class ").append(entryName).append("DaoImpl").append(" extends GenericDaoImpl<").append(entryName).append(">").append(" implements ").append(entryName).append("Dao\r\n");
 				sb.append("{\r\n\r\n}");
 				
@@ -223,7 +223,7 @@ public class Db2Java
 				FileWriter fw = new FileWriter(file);
 				StringBuilder sb = new StringBuilder("package ").append(packageInfo).append("service;\r\n\r\n");
 				sb.append("import java.util.List;\r\n\r\n");
-				sb.append("import ").append(packageInfo).append("entry.").append(entryName).append(";\r\n\r\n");
+				sb.append("import ").append(packageInfo).append("entity.").append(entryName).append(";\r\n\r\n");
 				sb.append("public interface ").append(entryName).append("Service").append("\r\n");
 				sb.append("{\r\n\t");
 				sb.append("public boolean add(").append(entryName).append(" ").append(tableName).append(");\r\n\r\n\t");
@@ -266,7 +266,7 @@ public class Db2Java
 				sb.append("import java.util.List;\r\n");
 				sb.append("import ").append(packageInfo).append("dao.").append(entryName).append("Dao;\r\n");
 				sb.append("import ").append(packageInfo).append("dao.impl.").append(entryName).append("DaoImpl;\r\n");
-				sb.append("import ").append(packageInfo).append("entry.").append(entryName).append(";\r\n");
+				sb.append("import ").append(packageInfo).append("entity.").append(entryName).append(";\r\n");
 				sb.append("import ").append(packageInfo).append("service.").append(entryName).append("Service;\r\n\r\n");
 				sb.append("public class ").append(entryName).append("ServiceImpl implements ").append(entryName).append("Service\r\n{");
 				sb.append("\r\n\t");

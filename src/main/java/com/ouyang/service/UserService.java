@@ -2,7 +2,7 @@ package com.ouyang.service;
 
 import java.util.List;
 
-import com.ouyang.entry.User;
+import com.ouyang.entity.User;
 
 public interface UserService
 {

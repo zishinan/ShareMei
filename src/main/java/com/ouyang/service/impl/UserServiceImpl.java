@@ -1,9 +1,10 @@
 package com.ouyang.service.impl;
 
 import java.util.List;
+
 import com.ouyang.dao.UserDao;
 import com.ouyang.dao.impl.UserDaoImpl;
-import com.ouyang.entry.User;
+import com.ouyang.entity.User;
 import com.ouyang.service.UserService;
 
 public class UserServiceImpl implements UserService

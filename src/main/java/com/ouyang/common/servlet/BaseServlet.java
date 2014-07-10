@@ -1,7 +1,6 @@
 package com.ouyang.common.servlet;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
@@ -29,6 +28,7 @@ public abstract class BaseServlet extends HttpServlet
 			throws ServletException, IOException
 	{
 		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		
 		String cmd = request.getParameter("cmd");
 		

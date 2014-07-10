@@ -5,7 +5,7 @@ import java.util.List;
 import com.ouyang.common.exception.LogicException;
 import com.ouyang.dao.ProductDao;
 import com.ouyang.dao.impl.ProductDaoImpl;
-import com.ouyang.entry.Product;
+import com.ouyang.entity.Product;
 import com.ouyang.service.ProductService;
 
 public class ProductServiceImpl implements ProductService

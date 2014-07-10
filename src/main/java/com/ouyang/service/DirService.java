@@ -2,7 +2,7 @@ package com.ouyang.service;
 
 import java.util.List;
 
-import com.ouyang.entry.Dir;
+import com.ouyang.entity.Dir;
 
 public interface DirService
 {

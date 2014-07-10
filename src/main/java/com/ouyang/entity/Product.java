@@ -1,4 +1,4 @@
-package com.ouyang.entry;
+package com.ouyang.entity;
 
 import java.util.Date;
 import com.ouyang.common.annotation.Entry;
@@ -6,26 +6,20 @@ import com.ouyang.common.annotation.Entry;
 @Entry
 public class Product
 {
-	private Long id;
 	private String content;
+	private Long id;
 	private String sn;
+	private Double costPrice;
 	private Double price;
-	private Double sell;
 	private Dir dir;
 	private Integer sequence;
 	private String name;
-	private String pic;
+	private Double salePrice;
+	private Integer storeNum;
 	private String spic;
+	private String pic;
 	private Date ctime;
 
-	public Long getId()
-	{
-		return this.id;
-	}
-	public void setId(Long id)
-	{
-		this.id=id;
-	}
 	public String getContent()
 	{
 		return this.content;
@@ -33,6 +27,14 @@ public class Product
 	public void setContent(String content)
 	{
 		this.content=content;
+	}
+	public Long getId()
+	{
+		return this.id;
+	}
+	public void setId(Long id)
+	{
+		this.id=id;
 	}
 	public String getSn()
 	{
@@ -42,6 +44,14 @@ public class Product
 	{
 		this.sn=sn;
 	}
+	public Double getCostPrice()
+	{
+		return this.costPrice;
+	}
+	public void setCostPrice(Double costPrice)
+	{
+		this.costPrice=costPrice;
+	}
 	public Double getPrice()
 	{
 		return this.price;
@@ -49,14 +59,6 @@ public class Product
 	public void setPrice(Double price)
 	{
 		this.price=price;
-	}
-	public Double getSell()
-	{
-		return this.sell;
-	}
-	public void setSell(Double sell)
-	{
-		this.sell=sell;
 	}
 	public Dir getDir()
 	{
@@ -82,13 +84,21 @@ public class Product
 	{
 		this.name=name;
 	}
-	public String getPic()
+	public Double getSalePrice()
 	{
-		return this.pic;
+		return this.salePrice;
 	}
-	public void setPic(String pic)
+	public void setSalePrice(Double salePrice)
 	{
-		this.pic=pic;
+		this.salePrice=salePrice;
+	}
+	public Integer getStoreNum()
+	{
+		return this.storeNum;
+	}
+	public void setStoreNum(Integer storeNum)
+	{
+		this.storeNum=storeNum;
 	}
 	public String getSpic()
 	{
@@ -97,6 +107,14 @@ public class Product
 	public void setSpic(String spic)
 	{
 		this.spic=spic;
+	}
+	public String getPic()
+	{
+		return this.pic;
+	}
+	public void setPic(String pic)
+	{
+		this.pic=pic;
 	}
 	public Date getCtime()
 	{

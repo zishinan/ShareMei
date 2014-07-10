@@ -1,88 +1,52 @@
 package com.ouyang.servlet;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.reflect.MethodUtils;
-
-import com.ouyang.entry.User;
+import com.ouyang.common.servlet.BaseServlet;
+import com.ouyang.entity.User;
+import com.ouyang.form.UserForm;
 import com.ouyang.service.UserService;
 import com.ouyang.service.impl.UserServiceImpl;
 
 @WebServlet("/user")
-public class UserServlet extends HttpServlet
+public class UserServlet extends BaseServlet
 {
 	UserService dirService = new UserServiceImpl();
 	private static final long serialVersionUID = 1L;
 
-	@Override
-	protected void service(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException
-	{
-		request.setCharacterEncoding("UTF-8");
-		String cmd = request.getParameter("cmd");
-
-		if (StringUtils.isNotBlank(cmd))
-		{
-			try
-			{
-				MethodUtils.invokeMethod(this, cmd, request, response);
-			}
-			catch (NoSuchMethodException | IllegalAccessException
-					| InvocationTargetException e)
-			{
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			list(request, response);
-		}
-	}
-
-	public void list(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
+	public void list()
 	{
 		List<User> list = dirService.list();
 		request.setAttribute("users", list);
-		request.getRequestDispatcher("/WEB-INF/view/user/listUser.jsp").forward(
-				request, response);
+		forward("/WEB-INF/view/user/listUser.jsp");
 	}
 
-	public void add(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
+	public void add()
 	{
-		request.getRequestDispatcher("/WEB-INF/view/user/addUser.jsp").forward(
-				request, response);
+		forward("/WEB-INF/view/user/addUser.jsp");
 	}
 
-	public void save(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
+	public void save()
 	{
-		request.setCharacterEncoding("UTF-8");
-		Map<String, String[]> map = request.getParameterMap();
+		UserForm userForm = new UserForm();
+		request2Object(userForm);
+		
+		if(!userForm.validate())
+		{
+			Map<String, String> errors = userForm.getErrors();
+			request.setAttribute("errors", errors);
+			add();
+		}
+		
 		User user = new User();
-		System.out.println(user);
-		try
-		{
-			BeanUtils.copyProperties(user, map);
-		}
-		catch (IllegalAccessException | InvocationTargetException e)
-		{
-			e.printStackTrace();
-		}
-		System.out.println(user);
+		
+		
+		request2Object(user);
+		
 		dirService.add(user);
-		list(request, response);
+		list();
 	}
 }
