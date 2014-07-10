@@ -20,11 +20,13 @@ public class ProductServlet extends BaseServlet
 		List<Dir> list = dirService.list();
 		request.setAttribute("dirs", list);
 		
-		forward("/WEB-INF/view/dir/listDir.jsp");
+		forward("/WEB-INF/view/dir/listProduct.jsp");
 	}
 
 	public void add()
 	{
+		List<Dir> list = dirService.list();
+		request.setAttribute("dirs", list);
 		forward("/WEB-INF/view/product/addProduct.jsp");
 	}
 
