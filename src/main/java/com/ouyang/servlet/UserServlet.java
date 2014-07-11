@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
 
+import com.ouyang.common.annotation.Validate;
 import com.ouyang.common.servlet.BaseServlet;
 import com.ouyang.entity.User;
 import com.ouyang.form.UserForm;
@@ -29,18 +30,9 @@ public class UserServlet extends BaseServlet
 		forward("/WEB-INF/view/user/addUser.jsp");
 	}
 
+	@Validate(formClass=UserForm.class,errrorMethod="add")
 	public void save()
 	{
-		UserForm userForm = new UserForm();
-		request2Object(userForm);
-		
-		if(!userForm.validate())
-		{
-			Map<String, String> errors = userForm.getErrors();
-			request.setAttribute("errors", errors);
-			add();
-		}
-		
 		User user = new User();
 		
 		

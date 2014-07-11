@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 
+import com.ouyang.common.annotation.Validate;
 import com.ouyang.common.servlet.BaseServlet;
 import com.ouyang.entity.Dir;
+import com.ouyang.form.ProductForm;
 import com.ouyang.service.DirService;
 import com.ouyang.service.impl.DirServiceImpl;
 
@@ -23,6 +25,7 @@ public class ProductServlet extends BaseServlet
 		forward("/WEB-INF/view/dir/listProduct.jsp");
 	}
 
+	@Validate(formClass=ProductForm.class)
 	public void add()
 	{
 		List<Dir> list = dirService.list();
