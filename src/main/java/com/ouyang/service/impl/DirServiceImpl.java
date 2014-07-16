@@ -2,6 +2,7 @@ package com.ouyang.service.impl;
 
 import java.util.List;
 
+import com.ouyang.common.exception.LogicException;
 import com.ouyang.dao.DirDao;
 import com.ouyang.dao.impl.DirDaoImpl;
 import com.ouyang.entity.Dir;
@@ -11,8 +12,9 @@ public class DirServiceImpl implements DirService
 {
 	private static DirDao dirDao = new DirDaoImpl();
 	@Override
-	public boolean add(Dir dir)
+	public boolean add(Dir dir) throws LogicException
 	{
+		dir.setSequence(1);
 		return dirDao.add(dir);
 	}
 	@Override
@@ -23,6 +25,7 @@ public class DirServiceImpl implements DirService
 	@Override
 	public boolean update(Dir dir)
 	{
+		dir.setSequence(1);
 		return dirDao.update(dir);
 	}
 	@Override

@@ -21,13 +21,12 @@ public class UserServlet extends BaseServlet
 	public void list()
 	{
 		List<User> list = dirService.list();
-		request.setAttribute("users", list);
-		forward("/WEB-INF/view/user/listUser.jsp");
+		forward("users", list,"/WEB-INF/view/user/listUser.jsp");
 	}
 
 	public void add()
 	{
-		forward("/WEB-INF/view/user/addUser.jsp");
+		forward(null,null,"/WEB-INF/view/user/addUser.jsp");
 	}
 
 	@Validate(formClass=UserForm.class,errrorMethod="add")

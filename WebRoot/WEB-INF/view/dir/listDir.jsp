@@ -10,18 +10,22 @@
 <body>
 	<a href="dir?cmd=add">添加分类</a>
 
-	<table>
+	<table border="1">
 		<tr>
 			<th>分类名称</th>
+			<th>分类编号</th>
 			<th>所属分类</th>
 			<th>排序序号</th>
+			<th>操作</th>
 		</tr>
 		
 		<c:forEach items="${dirs}" var="d">
 		<tr>
 			<td>${d.name}</td>
-			<td>${d.dir}</td>
+			<td>${d.sn}</td>
+			<td>${d.dir.name}</td>
 			<td>${d.sequence}</td>
+			<td><a href="dir?cmd=update&id=${d.id}">修改</a>&nbsp;&nbsp;<a href="dir?cmd=delete&id=${d.id}">删除</a></td>
 		</tr>
 		</c:forEach>
 		

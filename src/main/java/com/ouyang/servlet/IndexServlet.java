@@ -12,6 +12,6 @@ public class IndexServlet extends BaseServlet
 	@Override
 	protected void list()
 	{
-		forward("/WEB-INF/view/index.jsp");
+		forward(null,null,"/WEB-INF/view/index.jsp");
 	}
 }

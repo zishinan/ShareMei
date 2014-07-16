@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.annotation.WebServlet;
 
 import com.ouyang.common.annotation.Validate;
+import com.ouyang.common.exception.LogicException;
 import com.ouyang.common.servlet.BaseServlet;
 import com.ouyang.entity.Dir;
 import com.ouyang.form.ProductForm;
@@ -20,17 +21,14 @@ public class ProductServlet extends BaseServlet
 	public void list()
 	{
 		List<Dir> list = dirService.list();
-		request.setAttribute("dirs", list);
-		
-		forward("/WEB-INF/view/dir/listProduct.jsp");
+		forward("dirs", list,"/WEB-INF/view/dir/listProduct.jsp");
 	}
 
 	@Validate(formClass=ProductForm.class)
 	public void add()
 	{
 		List<Dir> list = dirService.list();
-		request.setAttribute("dirs", list);
-		forward("/WEB-INF/view/product/addProduct.jsp");
+		forward("dirs", list,"/WEB-INF/view/product/addProduct.jsp");
 	}
 
 	public void save()
@@ -38,7 +36,15 @@ public class ProductServlet extends BaseServlet
 		Dir dir = new Dir();
 		request2Object(dir);
 		System.out.println(dir);
-		dirService.add(dir);
+		try
+		{
+			dirService.add(dir);
+		}
+		catch (LogicException e)
+		{
+			forward("errorMsg", e.getMessage(),"/WEB-INF/view/error.jsp");
+			e.printStackTrace();
+		}
 		list();
 	}
 
