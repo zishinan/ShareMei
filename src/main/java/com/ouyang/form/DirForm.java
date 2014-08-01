@@ -24,16 +24,16 @@ public class DirForm extends BaseForm
 		{
 			addError("name", "分类名称不能为空！");
 		}
-		else if (dirDao.nameExist(name))
+		else if (StringUtils.isBlank(id) && dirDao.nameExist(name))
 		{
 			addError("name", "分类名称已存在");
 		}
 
-		if (StringUtils.isBlank(sn) && StringUtils.isBlank(id))
+		if (StringUtils.isBlank(sn))
 		{
 			addError("sn", "分类编号不能为空！");
 		}
-		else if (dirDao.snExist(sn) && StringUtils.isBlank(id))
+		else if (StringUtils.isBlank(id) && dirDao.snExist(sn) )
 		{
 			addError("sn", "分类编号已存在");
 		}

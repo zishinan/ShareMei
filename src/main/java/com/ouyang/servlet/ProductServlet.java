@@ -2,43 +2,57 @@ package com.ouyang.servlet;
 
 import java.util.List;
 
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 
-import com.ouyang.common.annotation.Validate;
+import org.apache.commons.lang3.StringUtils;
+
 import com.ouyang.common.exception.LogicException;
 import com.ouyang.common.servlet.BaseServlet;
 import com.ouyang.entity.Dir;
-import com.ouyang.form.ProductForm;
+import com.ouyang.entity.Product;
 import com.ouyang.service.DirService;
+import com.ouyang.service.ProductService;
 import com.ouyang.service.impl.DirServiceImpl;
+import com.ouyang.service.impl.ProductServiceImpl;
 
 @WebServlet("/product")
+@MultipartConfig
 public class ProductServlet extends BaseServlet
 {
 	DirService dirService = new DirServiceImpl();
+	ProductService productService = new ProductServiceImpl();
 	private static final long serialVersionUID = 1L;
 
 	public void list()
 	{
-		List<Dir> list = dirService.list();
-		forward("dirs", list,"/WEB-INF/view/dir/listProduct.jsp");
+		List<Product> list = productService.list();
+		forward("products", list,"/WEB-INF/view/product/listProduct.jsp");
 	}
 
-	@Validate(formClass=ProductForm.class)
 	public void add()
 	{
 		List<Dir> list = dirService.list();
-		forward("dirs", list,"/WEB-INF/view/product/addProduct.jsp");
+		forward("dirs", list,"/WEB-INF/view/product/editProduct.jsp");
 	}
 
 	public void save()
 	{
-		Dir dir = new Dir();
-		request2Object(dir);
-		System.out.println(dir);
+		System.out.println("save ==============");
+		Product product = new Product();
+		request2Object(product);
+		System.out.println(product);
+		String dir_id = request.getParameter("dir_id");
+		if(StringUtils.isNotBlank(dir_id))
+		{
+			Dir dir = new Dir();
+			dir.setId(Long.parseLong(dir_id));
+			product.setDir(dir);
+		}
+		System.out.println(product);
 		try
 		{
-			dirService.add(dir);
+			productService.add(product);
 		}
 		catch (LogicException e)
 		{

@@ -8,20 +8,23 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="">
+	<form action="product?cmd=save" method="post" enctype="multipart/form-data">
+	
+	<input name="id" type="hidden" value="${product.id }"/>
 		产品名称：<input name="name" type="text" /><br>
 		产品编号：<input name="sn" type="text" /><br>
-		产品类型：<select name="dir">
-				<c:forEach items="dirs" var="d">
-				<option value="${d.id}">${d.name}</option>
+		产品类型：<select name="dir_id">
+				<c:forEach items="${dirs }" var="d">
+				<option value="${d.id}" ${d.id == product.dir.id?"selected='selected'":"" }>${d.name}</option>
 				</c:forEach>
 			  </select><br>
 		原价：<input name="price" type="text" /><br>
 		折扣价：<input name="salePrice" type="text" /><br>
 		进价：<input name="costPrice" type="text" /><br>
 		库存：<input name="storeNum" type="text" /><br>
-		简介：<input name="storeNum" type="text" /><br>
-		<input type="submit" value="添加" >&nbsp;&nbsp;<input type="reset" value="重置">
+		简介：<input name="content" type="text" /><br>
+		图片：<input name="pic_file" type="file" /><br>
+		<input type="submit" value="确定" >&nbsp;&nbsp;<input type="reset" value="重置">
 	</form> 
 </body>
 </html>

@@ -15,11 +15,6 @@ public class ProductServiceImpl implements ProductService
 	@Override
 	public boolean add(Product product) throws LogicException
 	{
-		List<Product> list = productDao.listQuery("name = ?", new Object[] { product.getName() }, null, null);
-		if (list != null && list.size() > 0)
-		{
-			throw new LogicException("商品名称重复！");
-		}
 		return productDao.add(product);
 	}
 

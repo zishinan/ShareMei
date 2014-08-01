@@ -1,21 +1,28 @@
 package com.ouyang.common.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 
 import com.ouyang.common.annotation.Validate;
+import com.ouyang.common.exception.LogicException;
 import com.ouyang.common.form.BaseForm;
+import com.ouyang.common.upload.CFile;
 
 /**
  * @author zishinan
@@ -150,6 +157,53 @@ public abstract class BaseServlet extends HttpServlet
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 上传图片
+	 * @param field 要上传的表单元素名称
+	 * @return
+	 * @throws LogicException 
+	 * @throws IOException 
+	 */
+	protected CFile upload(String field) throws LogicException, IOException
+	{
+		//上传文件夹
+		String pathname = "upload";
+		Part part = null;
+		try
+		{
+			part = request.getPart(field);
+		}
+		catch (IOException | ServletException e)
+		{
+			throw new LogicException("上传的文件大小超出了规定大小,单个文件超过了2M,所有文件的总大小不超过了3M！");
+		}
+		
+		if(part != null && part.getSize() > 0)
+		{
+			//获取文件名
+			String fileName = FilenameUtils.getName(StringUtils.substringBetween(part.getHeader("Content-Disposition"), "filename=\"","\""));
+			//获取后缀名
+			String fileExt = FilenameUtils.getExtension(fileName);
+			//从ServletContext初始化参数中获取允许上传的后缀名
+			String[] allowExts = getServletContext().getInitParameter("allowExt").split(",");
+			if(ArrayUtils.contains(allowExts, fileExt.toLowerCase()))
+			{
+				throw new LogicException("上传的文件格式不符合！");
+			}
+			File file = new File(getServletContext().getRealPath(pathname));
+			if(!file.exists() || file.isFile())
+			{
+				file.mkdirs();
+			}
+			
+			String targetPath = new StringBuilder(pathname).append("/").append(System.currentTimeMillis()).append(UUID.randomUUID()).append(".").append(fileExt).toString();
+			part.write(getServletContext().getRealPath("/") + targetPath);
+			return new CFile(fileName, targetPath, "");
+		}
+		
+		return null;
 	}
 
 }

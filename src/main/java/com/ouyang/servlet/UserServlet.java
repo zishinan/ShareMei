@@ -1,9 +1,13 @@
 package com.ouyang.servlet;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.ouyang.common.annotation.Validate;
 import com.ouyang.common.servlet.BaseServlet;
@@ -18,6 +22,12 @@ public class UserServlet extends BaseServlet
 	UserService dirService = new UserServiceImpl();
 	private static final long serialVersionUID = 1L;
 
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException
+	{
+		super.doGet(req, resp);
+	}
 	public void list()
 	{
 		List<User> list = dirService.list();

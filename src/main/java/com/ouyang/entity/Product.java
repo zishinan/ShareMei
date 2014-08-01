@@ -6,35 +6,28 @@ import com.ouyang.common.annotation.Entry;
 @Entry
 public class Product
 {
-	private String content;
-	private Long id;
-	private String sn;
 	private Double costPrice;
+	private String sn;
+	private String pic;
+	private String spic;
+	private Integer storeNum;
+	private Date ctime;
+	private Long id;
+	private String content;
 	private Double price;
 	private Dir dir;
 	private Integer sequence;
 	private String name;
+	private Integer clickNum;
 	private Double salePrice;
-	private Integer storeNum;
-	private String spic;
-	private String pic;
-	private Date ctime;
 
-	public String getContent()
+	public Double getCostPrice()
 	{
-		return this.content;
+		return this.costPrice;
 	}
-	public void setContent(String content)
+	public void setCostPrice(Double costPrice)
 	{
-		this.content=content;
-	}
-	public Long getId()
-	{
-		return this.id;
-	}
-	public void setId(Long id)
-	{
-		this.id=id;
+		this.costPrice=costPrice;
 	}
 	public String getSn()
 	{
@@ -44,13 +37,53 @@ public class Product
 	{
 		this.sn=sn;
 	}
-	public Double getCostPrice()
+	public String getPic()
 	{
-		return this.costPrice;
+		return this.pic;
 	}
-	public void setCostPrice(Double costPrice)
+	public void setPic(String pic)
 	{
-		this.costPrice=costPrice;
+		this.pic=pic;
+	}
+	public String getSpic()
+	{
+		return this.spic;
+	}
+	public void setSpic(String spic)
+	{
+		this.spic=spic;
+	}
+	public Integer getStoreNum()
+	{
+		return this.storeNum;
+	}
+	public void setStoreNum(Integer storeNum)
+	{
+		this.storeNum=storeNum;
+	}
+	public Date getCtime()
+	{
+		return this.ctime;
+	}
+	public void setCtime(Date ctime)
+	{
+		this.ctime=ctime;
+	}
+	public Long getId()
+	{
+		return this.id;
+	}
+	public void setId(Long id)
+	{
+		this.id=id;
+	}
+	public String getContent()
+	{
+		return this.content;
+	}
+	public void setContent(String content)
+	{
+		this.content=content;
 	}
 	public Double getPrice()
 	{
@@ -84,6 +117,14 @@ public class Product
 	{
 		this.name=name;
 	}
+	public Integer getClickNum()
+	{
+		return this.clickNum;
+	}
+	public void setClickNum(Integer clickNum)
+	{
+		this.clickNum=clickNum;
+	}
 	public Double getSalePrice()
 	{
 		return this.salePrice;
@@ -92,37 +133,17 @@ public class Product
 	{
 		this.salePrice=salePrice;
 	}
-	public Integer getStoreNum()
+	@Override
+	public String toString()
 	{
-		return this.storeNum;
+		return "Product [costPrice=" + costPrice + ", sn=" + sn + ", pic="
+				+ pic + ", spic=" + spic + ", storeNum=" + storeNum
+				+ ", ctime=" + ctime + ", id=" + id + ", content=" + content
+				+ ", price=" + price + ", dir=" + dir + ", sequence="
+				+ sequence + ", name=" + name + ", clickNum=" + clickNum
+				+ ", salePrice=" + salePrice + "]";
 	}
-	public void setStoreNum(Integer storeNum)
-	{
-		this.storeNum=storeNum;
-	}
-	public String getSpic()
-	{
-		return this.spic;
-	}
-	public void setSpic(String spic)
-	{
-		this.spic=spic;
-	}
-	public String getPic()
-	{
-		return this.pic;
-	}
-	public void setPic(String pic)
-	{
-		this.pic=pic;
-	}
-	public Date getCtime()
-	{
-		return this.ctime;
-	}
-	public void setCtime(Date ctime)
-	{
-		this.ctime=ctime;
-	}
+	
+	
 
 }
