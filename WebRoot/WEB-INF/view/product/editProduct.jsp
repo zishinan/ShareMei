@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>${ShareMeiTitle}</title>
 </head>
 <body>
 	<form action="product?cmd=save" method="post" enctype="multipart/form-data">
@@ -15,8 +15,8 @@
 		产品编号：<input name="sn" type="text" /><br>
 		产品类型：<select name="dir_id">
 				<c:forEach items="${dirs }" var="d">
-				<option value="${d.id}" ${d.id == product.dir.id?"selected='selected'":"" }>${d.name}</option>
 				</c:forEach>
+				<option value="${d.id}" ${d.id == product.dir.id?"selected='selected'":"" }>${d.name}</option>
 			  </select><br>
 		原价：<input name="price" type="text" /><br>
 		折扣价：<input name="salePrice" type="text" /><br>

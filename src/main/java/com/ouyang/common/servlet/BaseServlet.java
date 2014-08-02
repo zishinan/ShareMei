@@ -137,13 +137,16 @@ public abstract class BaseServlet extends HttpServlet
 	
 	
 	/**
-	 * 封装数据并转发请求
+	 * 封装数据并转发请求,并将title注入
 	 * @param name	attribute键,没有填入null
 	 * @param o		attribute值,没有填入null
 	 * @param path	转发路径
 	 */
 	protected void forward(String name,Object o, String path)
 	{
+		//网页上的标题
+		String title = "鲜美购ShareMei";
+		request.setAttribute("ShareMeiTitle", title);
 		try
 		{
 			if(null != name && null != o)
