@@ -1,5 +1,6 @@
 package com.ouyang.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.ouyang.common.exception.LogicException;
@@ -15,6 +16,9 @@ public class ProductServiceImpl implements ProductService
 	@Override
 	public boolean add(Product product) throws LogicException
 	{
+		product.setClickNum(0);
+		product.setCtime(new Date());
+		product.setSequence(0);
 		return productDao.add(product);
 	}
 

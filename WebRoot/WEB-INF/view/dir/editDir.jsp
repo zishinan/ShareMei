@@ -15,7 +15,7 @@
 		所属分类：<select name="dir_id">
 				<option value="0">无</option>
 				<c:forEach items="${dirs}" var="d">
-				<option value="${d.id}" ${d.id == dir.dir.id?"selected='selected'":"" }>${d.name}</option>
+					<option value="${d.id}" ${d.id == dir.dir.id?"selected='selected'":"" }>${d.name}</option>
 				</c:forEach>
 			  </select><br>
 		

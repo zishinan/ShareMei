@@ -41,7 +41,6 @@ public class ProductServlet extends BaseServlet
 		System.out.println("save ==============");
 		Product product = new Product();
 		request2Object(product);
-		System.out.println(product);
 		String dir_id = request.getParameter("dir_id");
 		if(StringUtils.isNotBlank(dir_id))
 		{
@@ -49,7 +48,6 @@ public class ProductServlet extends BaseServlet
 			dir.setId(Long.parseLong(dir_id));
 			product.setDir(dir);
 		}
-		System.out.println(product);
 		try
 		{
 			productService.add(product);
