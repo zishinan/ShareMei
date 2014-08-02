@@ -187,7 +187,7 @@ public abstract class BaseServlet extends HttpServlet
 			//获取后缀名
 			String fileExt = FilenameUtils.getExtension(fileName);
 			//从ServletContext初始化参数中获取允许上传的后缀名
-			String[] allowExts = getServletContext().getInitParameter("allowExt").split(",");
+			String[] allowExts = getServletContext().getInitParameter("allowExt").toLowerCase().split(",");
 			if(ArrayUtils.contains(allowExts, fileExt.toLowerCase()))
 			{
 				throw new LogicException("上传的文件格式不符合！");
