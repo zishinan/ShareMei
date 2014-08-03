@@ -165,7 +165,7 @@ public abstract class BaseServlet extends HttpServlet
 	/**
 	 * 上传图片
 	 * @param field 要上传的表单元素名称
-	 * @return
+	 * @return	上传封装文件
 	 * @throws LogicException 
 	 * @throws IOException 
 	 */
@@ -180,7 +180,7 @@ public abstract class BaseServlet extends HttpServlet
 		}
 		catch (IOException | ServletException e)
 		{
-			throw new LogicException("上传的文件大小超出了规定大小,单个文件超过了2M,所有文件的总大小不超过了3M！");
+			throw new LogicException("上传的文件大小超出了规定大小,单个文件超过了2M,所有文件的总大小不超过了10M！");
 		}
 		
 		if(part != null && part.getSize() > 0)
@@ -202,11 +202,17 @@ public abstract class BaseServlet extends HttpServlet
 			}
 			
 			String targetPath = new StringBuilder(pathname).append("/").append(System.currentTimeMillis()).append(UUID.randomUUID()).append(".").append(fileExt).toString();
-			part.write(getServletContext().getRealPath("/") + targetPath);
-			return new CFile(fileName, targetPath, "");
+			part.write(getBasePath() + targetPath);
+			
+			return new CFile(fileName, targetPath);
 		}
 		
 		return null;
+	}
+	
+	public String getBasePath()
+	{
+		return getServletContext().getRealPath("/");
 	}
 
 }

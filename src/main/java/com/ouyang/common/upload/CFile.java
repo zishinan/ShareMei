@@ -4,13 +4,15 @@ public class CFile
 {
 	private String fileName;
 	private String picPath;
-	private String spicPath;
 	
-	public CFile(String fileName,String picPath,String spicPath)
+	/**
+	 * @param fileName	文件名
+	 * @param picPath	上传路径
+	 */
+	public CFile(String fileName,String picPath)
 	{
 		this.fileName = fileName;
 		this.picPath = picPath;
-		this.spicPath = spicPath;
 	}
 	public String getFileName()
 	{
@@ -27,13 +29,5 @@ public class CFile
 	public void setPicPath(String picPath)
 	{
 		this.picPath = picPath;
-	}
-	public String getSpicPath()
-	{
-		return spicPath;
-	}
-	public void setSpicPath(String spicPath)
-	{
-		this.spicPath = spicPath;
 	}
 }
