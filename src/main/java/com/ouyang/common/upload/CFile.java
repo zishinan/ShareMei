@@ -3,16 +3,12 @@ package com.ouyang.common.upload;
 public class CFile
 {
 	private String fileName;
-	private String picPath;
+	private String targetPath;
 	
-	/**
-	 * @param fileName	文件名
-	 * @param picPath	上传路径
-	 */
-	public CFile(String fileName,String picPath)
+	public CFile(String fileName, String targetPath)
 	{
 		this.fileName = fileName;
-		this.picPath = picPath;
+		this.targetPath = targetPath;
 	}
 	public String getFileName()
 	{
@@ -22,12 +18,12 @@ public class CFile
 	{
 		this.fileName = fileName;
 	}
-	public String getPicPath()
+	public String getTargetPath()
 	{
-		return picPath;
+		return targetPath;
 	}
-	public void setPicPath(String picPath)
+	public void setTargetPath(String targetPath)
 	{
-		this.picPath = picPath;
+		this.targetPath = targetPath;
 	}
 }

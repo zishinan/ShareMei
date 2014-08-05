@@ -1,20 +1,17 @@
 package com.ouyang.servlet;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 
-import net.coobird.thumbnailator.Thumbnails;
-
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
 import com.ouyang.common.exception.LogicException;
 import com.ouyang.common.servlet.BaseServlet;
-import com.ouyang.common.upload.CFile;
+import com.ouyang.common.upload.PicFile;
 import com.ouyang.entity.Dir;
 import com.ouyang.entity.Product;
 import com.ouyang.service.DirService;
@@ -26,6 +23,7 @@ import com.ouyang.service.impl.ProductServiceImpl;
 @MultipartConfig(maxFileSize=1024*1024*2,maxRequestSize=1024*1024*10)
 public class ProductServlet extends BaseServlet
 {
+	Logger log = Logger.getLogger(ProductServlet.class);
 	DirService dirService = new DirServiceImpl();
 	ProductService productService = new ProductServiceImpl();
 	private static final long serialVersionUID = 1L;
@@ -55,46 +53,25 @@ public class ProductServlet extends BaseServlet
 			product.setDir(dir);
 		}
 		
-		CFile cFile = null;
+		
+		PicFile picFile = null;
 		try
 		{
-			cFile = upload("pic_file");
-		}
-		catch (LogicException | IOException e1)
-		{
-			e1.printStackTrace();
-			add();
-			return;
-		}
-		
-		if(cFile != null)
-		{
-			String targetPath = cFile.getPicPath();
-			String smallPath = FilenameUtils.getFullPath(targetPath) + "spic/" + FilenameUtils.getName(targetPath);
-			try
+			picFile = upload("pic_file");
+			if(picFile != null)
 			{
-				Thumbnails.of(new File(getBasePath(), targetPath)).size(160, 160).toFile(new File(getBasePath(), smallPath));
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
+				product.setPic(picFile.getPicPath());
+				product.setSpic(picFile.getSpicPath());
 			}
 			
-			product.setPic(targetPath);
-			product.setSpic(smallPath);
-		}
-		
-		try
-		{
 			productService.add(product);
 		}
-		catch (LogicException e)
+		catch (LogicException | IOException e)
 		{
-			e.printStackTrace();
+			log.debug(e.getMessage());
 			add();
 			return;
 		}
-		
 		list();
 	}
 

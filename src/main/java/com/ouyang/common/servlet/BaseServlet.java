@@ -5,17 +5,16 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+
+import net.coobird.thumbnailator.Thumbnails;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 
@@ -23,11 +22,9 @@ import com.ouyang.common.annotation.Validate;
 import com.ouyang.common.exception.LogicException;
 import com.ouyang.common.form.BaseForm;
 import com.ouyang.common.upload.CFile;
+import com.ouyang.common.upload.FileUtil;
+import com.ouyang.common.upload.PicFile;
 
-/**
- * @author zishinan
- *
- */
 public abstract class BaseServlet extends HttpServlet
 {
 	private static final long serialVersionUID = -5234775202951986769L;
@@ -163,48 +160,25 @@ public abstract class BaseServlet extends HttpServlet
 	}
 	
 	/**
-	 * 上传图片
-	 * @param field 要上传的表单元素名称
-	 * @return	上传封装文件
-	 * @throws LogicException 
-	 * @throws IOException 
+	 * 图片上传
+	 * @param field		上传目录
+	 * @return	上传成功返回PicFile,否则返回null
+	 * @throws LogicException
+	 * @throws IOException
 	 */
-	protected CFile upload(String field) throws LogicException, IOException
+	protected PicFile upload(String field) throws LogicException, IOException
 	{
-		//上传文件夹
-		String pathname = "upload";
-		Part part = null;
-		try
-		{
-			part = request.getPart(field);
-		}
-		catch (IOException | ServletException e)
-		{
-			throw new LogicException("上传的文件大小超出了规定大小,单个文件超过了2M,所有文件的总大小不超过了10M！");
-		}
 		
-		if(part != null && part.getSize() > 0)
+		String pathname = "upload";
+		String[] allowExts = getServletContext().getInitParameter("allowExt").toLowerCase().split(",");
+		
+		CFile cFile = FileUtil.upload(request, getServletContext(), field, pathname, allowExts);
+		if(cFile != null)
 		{
-			//获取文件名
-			String fileName = FilenameUtils.getName(StringUtils.substringBetween(part.getHeader("Content-Disposition"), "filename=\"","\""));
-			//获取后缀名
-			String fileExt = FilenameUtils.getExtension(fileName);
-			//从ServletContext初始化参数中获取允许上传的后缀名
-			String[] allowExts = getServletContext().getInitParameter("allowExt").toLowerCase().split(",");
-			if(ArrayUtils.contains(allowExts, fileExt.toLowerCase()))
-			{
-				throw new LogicException("上传的文件格式不符合！");
-			}
-			File file = new File(getServletContext().getRealPath(pathname));
-			if(!file.exists() || file.isFile())
-			{
-				file.mkdirs();
-			}
-			
-			String targetPath = new StringBuilder(pathname).append("/").append(System.currentTimeMillis()).append(UUID.randomUUID()).append(".").append(fileExt).toString();
-			part.write(getBasePath() + targetPath);
-			
-			return new CFile(fileName, targetPath);
+			String targetPath = cFile.getTargetPath();
+			String smallPath = FilenameUtils.getFullPath(targetPath) + "spic/" + FilenameUtils.getName(targetPath);
+			Thumbnails.of(new File(getBasePath(), targetPath)).size(160, 160).toFile(new File(getBasePath(), smallPath));
+			return new PicFile(cFile.getFileName(),	targetPath, smallPath);
 		}
 		
 		return null;
