@@ -42,7 +42,6 @@ public class ProductServlet extends BaseServlet
 
 	public void save()
 	{
-		System.out.println("save ==============");
 		Product product = new Product();
 		request2Object(product);
 		String dir_id = request.getParameter("dir_id");
@@ -68,6 +67,7 @@ public class ProductServlet extends BaseServlet
 		}
 		catch (LogicException | IOException e)
 		{
+			System.out.println("================");
 			log.debug(e.getMessage());
 			add();
 			return;

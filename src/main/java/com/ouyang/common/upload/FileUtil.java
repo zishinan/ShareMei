@@ -45,7 +45,7 @@ public class FileUtil
 			String fileName = FilenameUtils.getName(StringUtils.substringBetween(part.getHeader("Content-Disposition"), "filename=\"","\""));
 			//获取后缀名
 			String fileExt = FilenameUtils.getExtension(fileName);
-			if(ArrayUtils.contains(allowExts, fileExt.toLowerCase()))
+			if(!ArrayUtils.contains(allowExts, fileExt.toLowerCase()))
 			{
 				throw new LogicException("上传的文件格式不符合！");
 			}

@@ -169,14 +169,20 @@ public abstract class BaseServlet extends HttpServlet
 	protected PicFile upload(String field) throws LogicException, IOException
 	{
 		
-		String pathname = "upload";
+		String pathname = "uploadPic";
 		String[] allowExts = getServletContext().getInitParameter("allowExt").toLowerCase().split(",");
 		
 		CFile cFile = FileUtil.upload(request, getServletContext(), field, pathname, allowExts);
 		if(cFile != null)
 		{
 			String targetPath = cFile.getTargetPath();
-			String smallPath = FilenameUtils.getFullPath(targetPath) + "spic/" + FilenameUtils.getName(targetPath);
+			String smallPathName = FilenameUtils.getFullPath(targetPath) + "spic";
+			File file = new File(getServletContext().getRealPath(smallPathName));
+			if(!file.exists() || file.isFile())
+			{
+				file.mkdirs();
+			}
+			String smallPath = smallPathName + "/" + FilenameUtils.getName(targetPath);
 			Thumbnails.of(new File(getBasePath(), targetPath)).size(160, 160).toFile(new File(getBasePath(), smallPath));
 			return new PicFile(cFile.getFileName(),	targetPath, smallPath);
 		}
