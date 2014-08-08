@@ -43,7 +43,7 @@
 			<td>${p.salePrice}</td>
 			<td>${p.storeNum}</td>
 			<td>${p.clickNum}</td>
-			<td><a href="dir?cmd=update&id=${d.id}">修改</a>&nbsp;&nbsp;<a href="dir?cmd=delete&id=${d.id}">删除</a></td>
+			<td><a href="product?cmd=update&id=${p.id}">修改</a>&nbsp;&nbsp;<a href="product?cmd=delete&id=${p.id}">删除</a></td>
 		</tr>
 		</c:forEach>
 		

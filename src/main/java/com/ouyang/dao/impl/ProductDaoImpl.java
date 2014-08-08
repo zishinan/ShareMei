@@ -1,28 +1,36 @@
 package com.ouyang.dao.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import com.ouyang.common.jdbc.GenericDaoImpl;
 import com.ouyang.dao.ProductDao;
 import com.ouyang.entity.Product;
-import com.ouyang.util.DateUtil;
 
 public class ProductDaoImpl extends GenericDaoImpl<Product> implements ProductDao
 {
 	@Override
-	public List<Product> listQuery(String condition, Object[] params, Integer start, Integer max)
+	public boolean nameExist(String name)
 	{
-		List<Product> list = super.listQuery(condition, params, start, max);
-		for (Product product : list)
+		String condition = "name = ?";
+		Object[] params = new Object[]{name};
+		List<Product> list = listQuery(condition, params, null, null);
+		if(list != null && list.size() > 0)
 		{
-			Date ctime = product.getCtime();
-			if(ctime != null)
-			{
-				// TODO 时间格式处理
-//				product.setCtime(DateUtil.formatDate(ctime));
-			}
+			return true;
 		}
-		return list;
+		return false;
+	}
+
+	@Override
+	public boolean snExist(String sn)
+	{
+		String condition = "sn = ?";
+		Object[] params = new Object[]{sn};
+		List<Product> list = listQuery(condition, params, null, null);
+		if(list != null && list.size() > 0)
+		{
+			return true;
+		}
+		return false;
 	}
 }

@@ -7,13 +7,16 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
 
+import com.ouyang.common.annotation.Validate;
 import com.ouyang.common.exception.LogicException;
 import com.ouyang.common.servlet.BaseServlet;
 import com.ouyang.common.upload.PicFile;
 import com.ouyang.entity.Dir;
 import com.ouyang.entity.Product;
+import com.ouyang.form.ProductForm;
 import com.ouyang.service.DirService;
 import com.ouyang.service.ProductService;
 import com.ouyang.service.impl.DirServiceImpl;
@@ -40,9 +43,21 @@ public class ProductServlet extends BaseServlet
 		forward("dirs", list,"/WEB-INF/view/product/editProduct.jsp");
 	}
 
+	@Validate(errrorMethod="add",formClass=ProductForm.class)
 	public void save()
 	{
-		Product product = new Product();
+		Product product = null;
+		
+		String id = request.getParameter("id");
+		if(StringUtils.isBlank(id))
+		{
+			product = new Product();
+		}
+		else 
+		{
+			product =  productService.getById(NumberUtils.toLong(id));
+		}
+		
 		request2Object(product);
 		String dir_id = request.getParameter("dir_id");
 		if(StringUtils.isNotBlank(dir_id))
@@ -51,7 +66,6 @@ public class ProductServlet extends BaseServlet
 			dir.setId(Long.parseLong(dir_id));
 			product.setDir(dir);
 		}
-		
 		
 		PicFile picFile = null;
 		try
@@ -63,16 +77,45 @@ public class ProductServlet extends BaseServlet
 				product.setSpic(picFile.getSpicPath());
 			}
 			
-			productService.add(product);
+			if(StringUtils.isBlank(id))
+			{
+				productService.add(product);
+			}
+			else
+			{
+				productService.update(product);
+			}
 		}
 		catch (LogicException | IOException e)
 		{
-			System.out.println("================");
 			log.debug(e.getMessage());
 			add();
 			return;
 		}
 		list();
+	}
+	
+	public void delete()
+	{
+		String id = request.getParameter("id");
+		if (StringUtils.isNotBlank(id))
+		{
+			productService.delete(Long.parseLong(id));
+		}
+		list();
+	}
+
+	public void update()
+	{
+		Product product = null;
+		String id = request.getParameter("id");
+		if (StringUtils.isNotBlank(id))
+		{
+			product = productService.getById(Long.parseLong(id));
+		}
+		request.setAttribute("product", product);
+		List<Dir> dirs = dirService.list();
+		forward("dirs", dirs, "/WEB-INF/view/product/editProduct.jsp");
 	}
 
 	

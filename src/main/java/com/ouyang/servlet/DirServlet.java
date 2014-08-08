@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.annotation.WebServlet;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import com.ouyang.common.annotation.Validate;
 import com.ouyang.common.exception.LogicException;
@@ -63,7 +64,7 @@ public class DirServlet extends BaseServlet
 		Dir dir = null;
 		if (StringUtils.isNotBlank(id))
 		{
-			dir = dirService.getById(Long.parseLong(id));
+			dir = dirService.getById(NumberUtils.toLong(id));
 		}
 		else
 		{

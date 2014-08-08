@@ -1,8 +1,11 @@
 package com.ouyang.form;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import com.ouyang.common.form.BaseForm;
+import com.ouyang.dao.ProductDao;
+import com.ouyang.dao.impl.ProductDaoImpl;
 
 /**
  * @author zishinan
@@ -10,49 +13,141 @@ import com.ouyang.common.form.BaseForm;
  */
 public class ProductForm extends BaseForm
 {
-	String name;
-	String password;
-	String repassword;
-	String nickName;
+	private String name;
+	private String sn;
+	private String price;
+	private String salePrice;
+	private String costPrice;
+	private String storeNum;
+	private String id;
+	private String content;
 	
 	public void customValidate()
 	{
-		if(StringUtils.isBlank(name))
+		ProductDao productDao = new ProductDaoImpl();
+		
+		if (StringUtils.isBlank(name))
 		{
-			addError("name", "用户名不能为空！");
+			addError("name", "产品名称不能为空！");
 		}
+		else if (StringUtils.isBlank(id) && productDao.nameExist(name))
+		{
+			addError("name", "产品名称已存在！");
+		}
+
+		if (StringUtils.isBlank(sn))
+		{
+			addError("sn", "产品编号不能为空！");
+		}
+		else if (StringUtils.isBlank(id) && productDao.snExist(sn))
+		{
+			addError("sn", "产品编号已存在！");
+		}
+		if(NumberUtils.toInt(storeNum) == 0)
+		{
+			addError("storeNum", "库存输入不正确！");
+		}
+		
+		if(NumberUtils.toDouble(price) == 0.0d)
+		{
+			addError("price", "原价输入不正确！");
+		}
+		
+		if(NumberUtils.toDouble(salePrice) == 0.0d)
+		{
+			addError("salePrice", "折扣价输入不正确！");
+		}
+		
+		if(NumberUtils.toDouble(costPrice) == 0.0d)
+		{
+			addError("costPrice", "进价输入不正确！");
+		}
+		
+		if(StringUtils.isBlank(content))
+		{
+			addError("content", "简介不能为空！");
+		}
+		
+		
 	}
-	
+
 	public String getName()
 	{
 		return name;
 	}
+
 	public void setName(String name)
 	{
 		this.name = name;
 	}
-	public String getPassword()
+
+	public String getSn()
 	{
-		return password;
+		return sn;
 	}
-	public void setPassword(String password)
+
+	public void setSn(String sn)
 	{
-		this.password = password;
+		this.sn = sn;
 	}
-	public String getRepassword()
+
+	public String getPrice()
 	{
-		return repassword;
+		return price;
 	}
-	public void setRepassword(String repassword)
+
+	public void setPrice(String price)
 	{
-		this.repassword = repassword;
+		this.price = price;
 	}
-	public String getNickName()
+
+	public String getSalePrice()
 	{
-		return nickName;
+		return salePrice;
 	}
-	public void setNickName(String nickName)
+
+	public void setSalePrice(String salePrice)
 	{
-		this.nickName = nickName;
+		this.salePrice = salePrice;
+	}
+
+	public String getCostPrice()
+	{
+		return costPrice;
+	}
+
+	public void setCostPrice(String costPrice)
+	{
+		this.costPrice = costPrice;
+	}
+
+	public String getStoreNum()
+	{
+		return storeNum;
+	}
+
+	public void setStoreNum(String storeNum)
+	{
+		this.storeNum = storeNum;
+	}
+
+	public String getId()
+	{
+		return id;
+	}
+
+	public void setId(String id)
+	{
+		this.id = id;
+	}
+
+	public String getContent()
+	{
+		return content;
+	}
+
+	public void setContent(String content)
+	{
+		this.content = content;
 	}
 }

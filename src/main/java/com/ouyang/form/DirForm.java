@@ -26,7 +26,7 @@ public class DirForm extends BaseForm
 		}
 		else if (StringUtils.isBlank(id) && dirDao.nameExist(name))
 		{
-			addError("name", "分类名称已存在");
+			addError("name", "分类名称已存在！");
 		}
 
 		if (StringUtils.isBlank(sn))
@@ -35,7 +35,7 @@ public class DirForm extends BaseForm
 		}
 		else if (StringUtils.isBlank(id) && dirDao.snExist(sn) )
 		{
-			addError("sn", "分类编号已存在");
+			addError("sn", "分类编号已存在！");
 		}
 	}
 
