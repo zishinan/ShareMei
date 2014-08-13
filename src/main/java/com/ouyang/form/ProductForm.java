@@ -30,10 +30,6 @@ public class ProductForm extends BaseForm
 		{
 			addError("name", "产品名称不能为空！");
 		}
-		else if (StringUtils.isBlank(id) && productDao.nameExist(name))
-		{
-			addError("name", "产品名称已存在！");
-		}
 
 		if (StringUtils.isBlank(sn))
 		{
@@ -67,8 +63,6 @@ public class ProductForm extends BaseForm
 		{
 			addError("content", "简介不能为空！");
 		}
-		
-		
 	}
 
 	public String getName()

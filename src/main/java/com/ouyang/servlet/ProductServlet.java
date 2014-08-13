@@ -1,5 +1,6 @@
 package com.ouyang.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -73,6 +74,7 @@ public class ProductServlet extends BaseServlet
 			picFile = upload("pic_file");
 			if(picFile != null)
 			{
+				deleteProductPic(product);
 				product.setPic(picFile.getPicPath());
 				product.setSpic(picFile.getSpicPath());
 			}
@@ -89,6 +91,7 @@ public class ProductServlet extends BaseServlet
 		catch (LogicException | IOException e)
 		{
 			log.debug(e.getMessage());
+			deleteProductPic(product);
 			add();
 			return;
 		}
@@ -100,9 +103,22 @@ public class ProductServlet extends BaseServlet
 		String id = request.getParameter("id");
 		if (StringUtils.isNotBlank(id))
 		{
-			productService.delete(Long.parseLong(id));
+			Long productId = Long.parseLong(id);
+			Product product = productService.getById(productId);
+			deleteProductPic(product);
+			productService.delete(productId);
 		}
 		list();
+	}
+
+	private void deleteProductPic(Product product)
+	{
+		String picPath = product.getPic();
+		if(StringUtils.isNotBlank(picPath))
+		{
+			new File(getBasePath(),picPath).delete();
+			new File(getBasePath(),product.getSpic()).delete();
+		}
 	}
 
 	public void update()
