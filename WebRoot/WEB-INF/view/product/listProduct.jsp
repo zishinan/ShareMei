@@ -8,7 +8,15 @@
 <title>${ShareMeiTitle}</title>
 </head>
 <body>
-	<a href="product?cmd=add">添加物品</a>
+	<a href="product?cmd=add">添加物品</a><br>
+	
+	<form action="/product">
+		<input name="name" type="text">
+		<input name="sn" type="text">
+		<input name="dir" type="text">
+		<input name="content" type="text">
+		<input type="submit" value="查询">
+	</form>
 
 	<table border="1">
 		<tr>
