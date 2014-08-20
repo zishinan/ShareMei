@@ -8,14 +8,18 @@
 <title>${ShareMeiTitle}</title>
 </head>
 <body>
-	<a href="product?cmd=add">添加物品</a><br>
+	<a href="product?cmd=add">添加物品</a><br><br>
 	
 	<form action="/product">
-		<input name="name" type="text">
-		<input name="sn" type="text">
-		<input name="dir" type="text">
-		<input name="content" type="text">
-		<input type="submit" value="查询">
+		产品名称：<input name="name" type="text"><br>
+		产品编号：<input name="sn" type="text"><br>
+		产品类型：<select name="dir_id">
+				<c:forEach items="${dirs }" var="d">
+					<option value="${d.id}">${d.name}</option>
+				</c:forEach>
+			  </select><br>
+		产品简介：<input name="content" type="text"><br>
+		<input type="submit" value="查询"><br>
 	</form>
 
 	<table border="1">

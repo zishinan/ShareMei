@@ -18,6 +18,7 @@ import com.ouyang.common.upload.PicFile;
 import com.ouyang.entity.Dir;
 import com.ouyang.entity.Product;
 import com.ouyang.form.ProductForm;
+import com.ouyang.form.query.QueryProductForm;
 import com.ouyang.service.DirService;
 import com.ouyang.service.ProductService;
 import com.ouyang.service.impl.DirServiceImpl;
@@ -34,6 +35,13 @@ public class ProductServlet extends BaseServlet
 
 	public void list()
 	{
+		QueryProductForm queryProductForm = new QueryProductForm();
+		request2Object(queryProductForm);
+		
+		
+		
+		List<Dir> dirs = dirService.list();
+		request.setAttribute("dirs", dirs);
 		List<Product> list = productService.list();
 		forward("products", list,"/WEB-INF/view/product/listProduct.jsp");
 	}
