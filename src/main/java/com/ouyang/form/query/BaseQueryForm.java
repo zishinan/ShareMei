@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.ouyang.common.pagequery.Conditions;
 
-public class QueryProductForm
+public class BaseQueryForm
 {
 	private String name;
 	private String sn;
