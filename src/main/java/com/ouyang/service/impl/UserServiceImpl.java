@@ -13,6 +13,7 @@ public class UserServiceImpl implements UserService
 	@Override
 	public boolean add(User user)
 	{
+		user.setCtime(System.currentTimeMillis() + "");
 		return userDao.add(user);
 	}
 	@Override

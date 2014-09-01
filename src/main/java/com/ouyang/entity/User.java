@@ -1,19 +1,18 @@
 package com.ouyang.entity;
 
-import java.util.Date;
 import com.ouyang.common.annotation.Entry;
 
 @Entry
 public class User
 {
 	private Long id;
-	private String birthday;
 	private String sex;
 	private String phone;
 	private String nickname;
 	private String email;
+	private String birthdaytime;
 	private String name;
-	private Date ctime;
+	private String ctime;
 
 	public Long getId()
 	{
@@ -22,14 +21,6 @@ public class User
 	public void setId(Long id)
 	{
 		this.id=id;
-	}
-	public String getBirthday()
-	{
-		return this.birthday;
-	}
-	public void setBirthday(String birthday)
-	{
-		this.birthday=birthday;
 	}
 	public String getSex()
 	{
@@ -63,6 +54,14 @@ public class User
 	{
 		this.email=email;
 	}
+	public String getBirthdaytime()
+	{
+		return this.birthdaytime;
+	}
+	public void setBirthdaytime(String birthdaytime)
+	{
+		this.birthdaytime=birthdaytime;
+	}
 	public String getName()
 	{
 		return this.name;
@@ -71,11 +70,11 @@ public class User
 	{
 		this.name=name;
 	}
-	public Date getCtime()
+	public String getCtime()
 	{
 		return this.ctime;
 	}
-	public void setCtime(Date ctime)
+	public void setCtime(String ctime)
 	{
 		this.ctime=ctime;
 	}

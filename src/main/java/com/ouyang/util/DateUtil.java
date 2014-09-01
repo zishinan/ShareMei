@@ -25,6 +25,36 @@ public class DateUtil
 		String outTime = dfTime.format(inTime);
 		return outTime;
 	}
+	
+	public static void main(String[] args)
+	{
+		String currentTime = System.currentTimeMillis() + "";
+		System.out.println(stringLong2StringFmt(currentTime));
+	}
+	
+	/**
+	 * 将String型的Long格式转换为yyyy-MM-dd HH:mm:ss格式
+	 * 传入不能转换为long的字符返回null;
+	 * @param inTime
+	 * @return
+	 */
+	public static String stringLong2StringFmt(String inTime)
+	{
+		SimpleDateFormat dfTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Long longInTime = 0L;
+		try
+		{
+			longInTime = Long.parseLong(inTime);
+			
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
+		
+		String outTime = dfTime.format(longInTime);
+		return outTime;
+	}
 
 	/**
 	 * 格式化日期为String型： yyyy-MM-dd

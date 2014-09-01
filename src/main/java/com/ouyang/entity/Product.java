@@ -1,6 +1,5 @@
 package com.ouyang.entity;
 
-import java.util.Date;
 import com.ouyang.common.annotation.Entry;
 
 @Entry
@@ -11,7 +10,7 @@ public class Product
 	private String pic;
 	private String spic;
 	private Integer storeNum;
-	private Date ctime;
+	private String ctime;
 	private Long id;
 	private String content;
 	private Double price;
@@ -61,11 +60,11 @@ public class Product
 	{
 		this.storeNum=storeNum;
 	}
-	public Date getCtime()
+	public String getCtime()
 	{
 		return this.ctime;
 	}
-	public void setCtime(Date ctime)
+	public void setCtime(String ctime)
 	{
 		this.ctime=ctime;
 	}
@@ -133,17 +132,5 @@ public class Product
 	{
 		this.salePrice=salePrice;
 	}
-	@Override
-	public String toString()
-	{
-		return "Product [costPrice=" + costPrice + ", sn=" + sn + ", pic="
-				+ pic + ", spic=" + spic + ", storeNum=" + storeNum
-				+ ", ctime=" + ctime + ", id=" + id + ", content=" + content
-				+ ", price=" + price + ", dir=" + dir + ", sequence="
-				+ sequence + ", name=" + name + ", clickNum=" + clickNum
-				+ ", salePrice=" + salePrice + "]";
-	}
-	
-	
 
 }

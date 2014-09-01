@@ -1,6 +1,5 @@
 package com.ouyang.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import com.ouyang.common.exception.LogicException;
@@ -8,6 +7,7 @@ import com.ouyang.dao.ProductDao;
 import com.ouyang.dao.impl.ProductDaoImpl;
 import com.ouyang.entity.Product;
 import com.ouyang.service.ProductService;
+import com.ouyang.util.DateUtil;
 
 public class ProductServiceImpl implements ProductService
 {
@@ -17,7 +17,7 @@ public class ProductServiceImpl implements ProductService
 	public boolean add(Product product) throws LogicException
 	{
 		product.setClickNum(0);
-		product.setCtime(new Date());
+		product.setCtime(System.currentTimeMillis() + "");
 		product.setSequence(0);
 		return productDao.add(product);
 	}
@@ -43,6 +43,11 @@ public class ProductServiceImpl implements ProductService
 	@Override
 	public List<Product> list()
 	{
-		return productDao.listQuery(null, null, null, null);
+		List<Product> list = productDao.listQuery(null, null, null, null);
+		for (Product product : list)
+		{
+			product.setCtime(DateUtil.stringLong2StringFmt(product.getCtime()));
+		}
+		return list;
 	}
 }

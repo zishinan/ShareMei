@@ -98,6 +98,12 @@ public class Db2Java
 				filed = filed.substring(0,filed.lastIndexOf("_"));
 				type = upperFirestChar(filed);
 			}
+			
+			if(filed.contains("time"))
+			{
+				type = "String";
+			}
+			
 			result.put(filed, type);
 		}
 		return result;
